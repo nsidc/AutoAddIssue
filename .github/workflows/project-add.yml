@@ -1,14 +1,13 @@
-# This is a basic workflow to help you get started with Actions
-
+# GitHub workflow to add new or transferred issues to a specified project
 name: Add Issues to Project
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   issues:
+    # ***********************************************************************************
+    # Feel free to customize this. Options are: opened, reopened, transferred, or labeled
     types: [opened, reopened, transferred]
+    # ************************************************************************************
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   upload-issue: 
     name: Add Issue to Project
@@ -17,5 +16,14 @@ jobs:
     steps:
       - uses: actions/add-to-project@v0.5.0
         with:
-          project-url: https://github.com/users/IanSinColorado/projects/4
+          # ***************************************************************
+          # Change this to the project URL you want to send your issues to
+          # GitHub Organization Project URL:
+          # https://github.com/orgs/<org_name>/projects/<project_number>
+          # GitHub User Project URL:
+          # https://github.com/users/<GitHub_username>/projects/<project_number>
+          project-url: https://github.com/orgs/<org_name>/projects/<project_number>
+          # ***************************************************************
+
+          # Be sure to add the PAT with the correct scope to the repository!
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
